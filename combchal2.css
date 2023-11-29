@@ -1,3 +1,7 @@
+p {
+    margin-left: 30px;
+}
+
 h1 + p {
     font-style: italic;
 }

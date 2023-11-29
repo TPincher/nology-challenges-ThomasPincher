@@ -22,7 +22,7 @@ div {
     padding-left: 0px;
 }
 
-ul > li {
+li {
     list-style-type: none;
     color: black;
     margin-left:0px

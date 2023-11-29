@@ -11,13 +11,13 @@ h1 + p + p + p {
     color: grey;
 }
 
-h3 + p,
-h3 + p + p,
-h3 + p + p + p {
+h2 + p,
+h2 + p + p,
+h2 + p + p + p {
     text-decoration: underline;
 }
 
-h4 + p + p,
-h4 + p + p + p {
+h3 + p + p,
+h3 + p + p + p {
     color: blue;
 }

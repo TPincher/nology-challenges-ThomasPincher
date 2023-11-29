@@ -6,7 +6,7 @@ h1 + p {
     font-style: italic;
 }
 
-h1 + p + p
+h1 + p + p,
 h1 + p + p + p {
     color: grey;
 }

@@ -1,0 +1,27 @@
+.outer-container {
+    display: flex;
+    width: 900px;
+    height: 300px;
+}
+
+#text-container1,
+#text-container2,
+#text-container3 {
+    display: flex;
+    width: 33%;
+    height: 300px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#text-container1 {
+    background-color: lightblue
+}
+
+#text-container2 {
+    background-color: orange
+}
+
+#text-container3 {
+    background-color: magenta
+}

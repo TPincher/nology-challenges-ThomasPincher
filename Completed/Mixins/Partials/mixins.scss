@@ -1,0 +1,10 @@
+@mixin fonts ($family, $weight, $alignment) {
+    font-family: $family;
+    font-weight: $weight;
+    text-align: $alignment;
+}
+
+@mixin borders ($width, $margin) {
+    width: $width;
+    margin: $margin;
+}

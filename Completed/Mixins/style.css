@@ -1,0 +1,20 @@
+.textBox {
+  width: 550px;
+  margin: 20px 20px;
+}
+.textBox--red-dot {
+  border: 2px dotted red;
+}
+.textBox--blue-solid {
+  border: 2px solid blue;
+}
+.textBox--dashed-blue {
+  border: 2px dashed blue;
+}
+
+p {
+  font-family: Arial;
+  font-weight: bold;
+  text-align: center;
+  margin: 0px;
+}

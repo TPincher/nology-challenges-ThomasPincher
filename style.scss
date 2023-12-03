@@ -1,0 +1,71 @@
+@use "./partials/_media-query-mixins";
+
+#outer-wrapper { 
+    padding: 0px;
+    width: 90vw;
+    height: 60vw;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+
+    @include media-query-mixins.medium {
+        flex-direction: row;
+    }
+
+    @include media-query-mixins.large {
+        flex-direction: row;
+    }
+}
+
+
+#topBar {
+    background-color: black;
+    height: 33.3%;
+
+    @include media-query-mixins.medium {
+        width: 33.3%;
+        height: 100%;
+    }
+
+    @include media-query-mixins.large {
+        width: 33.3%;
+        height: 100%;
+        background-color: green;
+    }
+}
+
+
+#middleBar {
+    background-color: red;
+    height: 33.3%;
+
+    @include media-query-mixins.medium {
+        width: 33.3%;
+        background-color: yellow;
+        height: 100%;
+    }
+
+    @include media-query-mixins.large {
+        width: 33.3%;
+        height: 100%;
+        background-color: white;
+    }
+}
+
+
+#bottomBar {
+    background-color: yellow;
+    height: 33.4%;
+    
+    @include media-query-mixins.medium {
+        width: 33.4%;
+        background-color: red;
+        height: 100%;
+    }
+
+    @include media-query-mixins.large {
+        width: 33.4%;
+        height: 100%;
+        background-color: orange;
+    }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form to submit</title>
+</head>
+
+<body>
+    <form
+      action="https://formspree.io/f/mpzggryb"
+      method="post">
+    
+        <label for="fullName">First Name</label>
+        <input 
+          type="text" 
+          id="fullName" 
+          name="full_name" 
+          required>
+
+        <label for="age">Age</label>
+        <input 
+          type="number" 
+          id="age" 
+          name="age" 
+          required>
+
+        <label for="state">State</label>
+        <select
+          name="state"
+          id="state"
+          required>
+          <option value="" hidden></option>
+          <option value="SA">SA</option>
+          <option value="WA">WA</option>
+          <option value="NT">NT</option>
+          <option value="QLD">QLD</option>
+          <option value="NSW">NSW</option>
+          <option value="ACT">ACT</option>
+          <option value="VIC">VIC</option>
+        </select>
+
+        <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required>
+
+        <label for="userComment">Comment</label>
+          <input 
+            type="textarea"
+            id="userComment"
+            name="comment"
+            required>
+
+        <input type="submit">
+
+    </form>
+</body>
+
+</html>

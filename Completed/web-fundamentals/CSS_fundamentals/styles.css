@@ -1,0 +1,34 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    color: orange;
+    text-align: center;
+}
+
+#line1 {
+    text-align: right;
+}
+
+#line2 {
+    text-align: left;
+    color: green;
+    font-weight: 600;
+}
+
+
+#bandsBox {
+    border: 2px solid black;
+    font-weight: 600;
+}
+
+#bandsList {
+    list-style-type: none;
+}
+
+#firstListItem {
+    font-style: italic;
+    text-decoration: underline;
+    font-weight: 600;
+}

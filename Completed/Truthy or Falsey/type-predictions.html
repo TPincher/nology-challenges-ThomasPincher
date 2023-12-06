@@ -1,0 +1,18 @@
+typeof 15; // Prediction: number
+typeof 5.5; // Prediction: number
+typeof NaN; // Prediction: NaN --actually number
+typeof "hello"; // Prediction: string
+typeof true; // Prediction: boolean
+typeof (1 != 2); // Prediction: boolean
+"hamburger" + "s"; // Prediction: string hambugers
+"hamburgers" - "s"; // Prediction: string --actually a number
+"1" + "3"; // Prediction: string 13
+"1" - "3"; // Prediction: number -2
+"johnny" + 5; // Prediction: string johnny5
+"johnny" - 5; // Prediction: string -- actually a number - NaN
+99 * "luftbaloons"; // Prediction: string -- actually number - NaN
+
+
+// Interesting that NaN resolved to a number. Presumably it is because it's a null version of a number.
+// Also, the only mathematical operator that works with strings seems to be the addition symbol. Others resolve to NaN as JS attempts to
+// convert them to numbers, and that NaN then resolves to a number.

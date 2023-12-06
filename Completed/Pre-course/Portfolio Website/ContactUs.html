@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="ContactUs.css">
+    <title>Tom's Flowers - Contact Us</title>
+</head>
+
+<body onload="renderMessages()">
+    <nav>
+        <ul>
+            <li><a href="Home.html">Back to Home</a></li>
+        </ul>
+    </nav>
+    
+    <header>
+    <h1>Tom's flowers - Contact Us!</h1>
+    <p>Use the form below to contact us for sales and/or support!</p>    
+    </header>
+
+    <main>
+        <form class="contact-form" onsubmit="return submitMessage(event);">
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email" required>
+
+            <label for="fullName">Full Name:</label>
+            <input type="text" name="fullName" id="fullName" required>
+
+            <label for="message">Message:</label>
+            <textarea name="message" id="message" rows="3" cols="20" required>Leave your message here</textarea>
+        
+            <button onclick="resetForm()">Clear</button>
+
+            <input type="submit" value="Submit">          
+        </form>
+    </main>
+
+    <footer>
+        <div class="form-title-section">
+            <h3>Messages</h3>
+            <button onclick="deleteMessages();">Clear Messages</button>
+        </div>
+
+        <div class="form-wrapper">
+            <dl id="sessionMessages">
+            </dl>
+        </div>
+    </footer>
+
+
+    <script>
+        // This function is checking to see if the key of "messages" is present and if so, it is dropped along with
+        // the related values. It then runs the "renderMessages" function.
+        function deleteMessages() {
+            if (window.sessionStorage.getItem("messages")) {
+                window.sessionStorage.removeItem("messages")
+            }
+
+            renderMessages();
+        }
+
+
+        function resetForm() {
+            document.getElementById("email").value = "";
+            document.getElementById("fullName").value = "";
+            document.getElementById("message").value = "Leave your message here";
+        }
+
+
+        function submitMessage(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const fullName = document.getElementById("fullName").value;
+            const message = document.getElementById("message").value;
+
+            const fullMessage = {
+                email, fullName, message
+            }
+
+            let sessionMessages = [];
+
+            // This checks to see if the key "messages" already exists in sessionStorage, then parses it back from a string
+            // and stores it in the sessionMessages array.
+            if (window.sessionStorage.getItem("messages")) {
+                sessionMessages = JSON.parse(window.sessionStorage.getItem("messages")
+                );
+            }
+
+            // This block takes the fullMessage variable and adds it to the sessionMessages array, then converts and adds everything
+            // in that array to sessionStorage under the key of "messages" and with string values
+            sessionMessages.push(fullMessage);
+            window.sessionStorage.setItem("messages",JSON.stringify(sessionMessages)
+            );
+
+            // uncomment the below line to check this function is working as intended:
+            // console.log(JSON.parse(sessionStorage.getItem("messages")));
+
+            renderMessages();
+        }
+
+
+        function renderMessages() {
+            let sessionMessages = [];
+
+            // This is the same code block from the above function. If the key of "messages"
+            // in sessionStorage has a value, it will parse the values into sessionMessages.
+            if (window.sessionStorage.getItem("messages")) {
+                sessionMessages = JSON.parse(window.sessionStorage.getItem("messages")
+                );
+            }
+
+            // This is creating an empty array, then looping over the number of sessionMessages values. Ite then appends the values
+            // of fullName, email and message and a linebreak to the listItem variable, and appends that to the ListItems array.
+            let listItems = [];
+            for (let i = 0; i < sessionMessages.length; i++) {
+                let listItem = "";
+                const sessionMessage = sessionMessages[i];
+                listItem += `<dt>${sessionMessage.fullName} - ${sessionMessage.email}</dt>`;
+                listItem += `<dd>${sessionMessage.message}</dd>`;
+                listItem += `<br />`;
+                listItems.push(listItem);
+            }
+
+            // This 'sessionMessages' is the descriptive list from the footer section. It is passed into the variable 'descList'
+            // so that the listItems array can be injected into the innerHTML.
+            let descList = document.getElementById('sessionMessages');
+            descList.innerHTML = listItems.join("");
+        };
+    </script>
+
+</body>
+
+</html>

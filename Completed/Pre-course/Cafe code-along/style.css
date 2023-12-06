@@ -1,0 +1,17 @@
+nav > ul {
+    list-style-type: none;
+    border: 2px solid black;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav > ul> li> a {
+    color: blue;
+    text-decoration: none;
+}
+
+header {
+    text-align: center;
+}

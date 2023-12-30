@@ -17,7 +17,7 @@
  * @returns {string[]} A list of the employees quotes for the website
  */
 export const getEmployeeQuotes = (employeeArr) => {
-  // Write code here
+  return employeeArr.map((employee) => employee.quote)
 };
 
 /**
@@ -27,7 +27,8 @@ export const getEmployeeQuotes = (employeeArr) => {
  * @returns {{name: string, quote: string, yearsEmployed: number, isManagement: boolean}[]} An array containing only managers
  */
 export const getTheManagers = (employeeArr) => {
-  // Write code here
+  const managerArray = [...employeeArr]
+  return managerArray.filter((manager) => manager.isManagement === true)
 };
 
 /**
@@ -37,7 +38,7 @@ export const getTheManagers = (employeeArr) => {
  * @returns {number} The number of the keys on the object
  */
 export const getNumberOfKeys = (object) => {
-  // Write code here
+  return Object.keys(object).length
 };
 
 /* Intermediate Challenges */
@@ -50,7 +51,12 @@ export const getNumberOfKeys = (object) => {
  * @returns {{name: string, price: number, hasFreeShipping: boolean, quantity: number}} The most expensive item in the shopping basket
  */
 export const findMostExpensiveItem = (shoppingBasketArr) => {
-  // Write code here
+    return shoppingBasketArr.reduce((acc, basketItem) => {
+    if (acc.price < basketItem.price) {
+      acc = basketItem
+    } ;
+    return acc;
+  })
 };
 
 /**
@@ -69,7 +75,13 @@ export const findMostExpensiveItem = (shoppingBasketArr) => {
  * @returns {{name: string, price: number, hasFreeShipping: boolean, quantity: number, totalPrice: number}[]} A new array where each object has had a total price added to it
  */
 export const settotalPrice = (shoppingBasketArr) => {
-  // Write code here
+  const newArray = shoppingBasketArr.map((arr) => {
+    return {...arr};
+  })
+  newArray.map((item) => {
+    item.totalPrice = item.price * item.quantity;
+  })
+  return newArray
 };
 
 /**
@@ -79,7 +91,11 @@ export const settotalPrice = (shoppingBasketArr) => {
  * @returns {number} The total cost of the order
  */
 export const totalShoppingBasket = (shoppingBasketArr) => {
-  // Write code here
+    return shoppingBasketArr.reduce((acc, basketItem) => {
+      acc += basketItem.totalPrice
+      return acc;
+  }, 0)
+  
 };
 
 /* Advanced Challenges */
@@ -92,7 +108,15 @@ export const totalShoppingBasket = (shoppingBasketArr) => {
  * @returns {{id: number, name: string, ingredients: string[], country: string}[]} An array of cleaned meal objects
  */
 export const getImportantKeys = (mealsArr) => {
-  // Write code here
+  const newArray = mealsArr.map((arr) => {
+    return {...arr};
+  })
+  const keys = ["id", "name", "ingredients", "country"]
+  return newArray.map((meal) => {
+  return keys.reduce((result, key) => ({
+    ...result, [key]: meal[key]
+  }), {})
+})
 };
 
 /**
@@ -106,7 +130,18 @@ export const getImportantKeys = (mealsArr) => {
  * @returns {{id: number, name: string, ingredients: string[], country: string, isVegetarian: boolean, timeToCook: number}[]}
  */
 export const setImportantKeys = (mealsArr) => {
-  // Write code here
+  const newArray = mealsArr.map((arr) => {
+    return {...arr};
+  })
+  return newArray.map((meal) => {
+    if (!('isVegetarian' in meal)) {
+      meal.isVegetarian = false
+    }
+    if (!('timeToCook' in meal)) {
+      meal.timeToCook = 15
+    }
+    return meal
+  })
 };
 
 /* Expert Challenge */
@@ -138,5 +173,36 @@ export const setImportantKeys = (mealsArr) => {
  * }[]} A Cleaned array of cocktail data
  */
 export const cleanCocktailResponseData = (cocktailData) => {
-  // Write code here
+  const clonedArray = cocktailData.map((arr) => {
+    return {...arr};
+  })
+  return clonedArray.map ((drink) => {
+    const newKeys = ["id", "drink", "category", "alcoholic", "ingredients", "instructions"]
+    const oldKeys = ["idDrink, strAlcoholic, strCategory, strDrink, strInstructions, strIngredient1",
+    "strIngredient2", "strIngredient3", "strIngredient4", "strIngredient5", "strIngredient6"]
+    const ingredientsList = []
+    Object.entries(drink).map((components) => {
+      if (components[0].includes("Ingredient") && components[1] != null) {
+        ingredientsList.push(components[1])
+      }
+    })
+    delete drink.strIngredient1
+    delete drink.strIngredient2
+    delete drink.strIngredient3
+    delete drink.strIngredient4
+    delete drink.strIngredient5
+    delete drink.strIngredient6
+    drink["id"] = drink["idDrink"]
+    drink["category"] = drink["strCategory"]
+    drink["alcoholic"] = drink["strAlcoholic"]
+    drink["instructions"] = drink["strInstructions"]
+    drink["drink"] = drink["strDrink"]
+    drink["ingredients"] = ingredientsList
+    delete drink.idDrink
+    delete drink.strAlcoholic
+    delete drink.strCategory
+    delete drink.strDrink
+    delete drink.strInstructions
+    return drink
+  })
 };

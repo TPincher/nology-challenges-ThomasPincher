@@ -68,8 +68,8 @@ export const sortCharactersAlphabetically = (charcterArr) => {
 
 export const sortNumbersHighToLow = (numberArr) => {
   return numberArr.sort(function(a, b) {
-    return a - b;
-  }).reverse()
+    return b - a;
+  })
 };
 
 /**
@@ -117,10 +117,7 @@ export const checkItemInstock = (toCheck) => {
 
 export const checkPrimaryColours = (coloursArr) => {
   const primaryColours = ["red", "yellow", "blue"]
-  function isPrimary(element) {
-    return primaryColours.includes(element)
-  }
-  return coloursArr.every(isPrimary)
+  return coloursArr.every((colour) => primaryColours.includes(colour))
 };
 
 /**
@@ -153,7 +150,7 @@ export const checkStringPalindrome = (stringOne) => {
  */
 
 export const totalNestedScoresArr = (scoresArr) => {
-  return scoresArr.map((innerArray) => innerArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0))
+  return scoresArr.map((innerArray) => innerArray.reduce((acc, cur) => acc + cur, 0))
 
 };
 
@@ -188,6 +185,9 @@ export const totalNestedScoresArr = (scoresArr) => {
 
 
 export const encryptString = (toEncrypt) => {
-  const xkcd = toEncrypt.split("")
-  console.log(xkcd)
+  return toEncrypt
+    .split("")
+    .reduce((acc, curr, ind) => (acc[ind % 3].push(curr), acc), [[], [], []])
+    .flat()
+    .join("");
 };

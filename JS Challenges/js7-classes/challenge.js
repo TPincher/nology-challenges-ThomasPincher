@@ -27,7 +27,10 @@ export class Coordinate {
    * @param {number} xCoord - 22.
    * @param {number} yCoord - 20.
    */
-  constructor(xCoord, yCoord) {}
+  constructor(xCoord, yCoord) {
+    this.xCoord = xCoord;
+    this.yCoord = yCoord;
+  }
 }
 
 /**
@@ -48,14 +51,16 @@ export class Alert {
    * Create an alert.
    * @param {string} message - "Are sure you want to proceed?"
    */
-  constructor() {}
+  constructor(message) {
+    this.message = message;
+  }
 
   /**
    * Returns a string with "!!!! " + " !!!!" added to the start and end of the message key.
    * @return {string} "!!!! Are sure you want to proceed? !!!!"
    */
   printMessage() {
-    return;
+    return `!!!! ${this.message} !!!!`;
   }
 }
 
@@ -83,17 +88,23 @@ export class Loader {
    * Create a loader.
    * @param {{innerHTML:string}} htmlRef - {innerHTML:""}
    */
-  constructor() {}
+  constructor(htmlRef) {
+    this.htmlRef = htmlRef;
+  }
 
   /**
    * Updates the htmlRef.innerHTML to display the loader's html.
    */
-  displayLoader() {}
+  displayLoader() {
+    this.htmlRef.innerHTML = '<div class="loader"></div>'
+  }
 
   /**
    * Updates the htmlRef.innerHTML to remove the loader's html.
    */
-  removeLoader() {}
+  removeLoader() {
+    this.htmlRef.innerHTML = ""
+  }
 }
 
 /**
@@ -125,21 +136,27 @@ export class Counter {
    * Create an counter.
    * @param {number} count - 50
    */
-  constructor() {}
+  constructor(count = 0) {
+    this.count = count;
+  }
 
   /**
    * A method that increments count by 1.
    * @return {number} 51
    */
 
-  // WRITE INCREMENT FUNCTION HERE
+increment() {
+  return this.count += 1;
+ }
 
   /**
    * A method that decrements count by 1 but will not go below 0.
    * @return {number} 49
    */
 
-  // WRITE DECREMENT FUNCTION HERE
+decrement() {
+  return this.count == 0 ? this.count = 0 : this.count -= 1;
+}
 }
 
 /**
@@ -167,14 +184,19 @@ export class Engine {
   /**
    * Create an engine.
    */
-  constructor() {}
+  constructor() {
+    this.engineIsRunning = false
+  }
 
   /**
    * Updates engineIsRunning to true and returns a conditonal string based if the engine is already running.
    * @return {string} "Engine has started running" or "Engine is already running"
    */
   startEngine() {
-    return;
+    if (this.engineIsRunning == true) {
+      return "Engine is already running"
+    } else this.engineIsRunning = true
+           return "Engine has started running"
   }
 
   /**
@@ -182,7 +204,10 @@ export class Engine {
    * @return {string} "Engine has stopped running" or "Engine has already stopped running"
    */
   stopEngine() {
-    return;
+    if (this.engineIsRunning == false) {
+      return "Engine has already stopped running"
+    } else this.engineIsRunning = false
+           return "Engine has stopped running"
   }
 }
 
@@ -224,19 +249,29 @@ export class Modal {
    * @param {string} title - "Error"
    * @param {string} message - "We are currently unable to provide this service"
    */
-  constructor() {}
+  constructor(htmlRef, title, message) {
+    this.htmlRef = htmlRef
+    this.title = title
+    this.message = message
+  }
 
   /**
    * A method that renders the html for a modal.
    */
 
-  // WRITE RENDER HTML METHOD HERE
-
+  renderHtml() {
+      this.htmlRef.innerHTML =`\n    <div class="modal">
+      <h2 class="modal--title">${this.title}</h2>
+      <p class="modal--message">${this.message}</p>
+    </div>\n    `}
+  
   /**
    * A method that toggles a CSS class to either show or hide the modal.
-   */
-
-  // WRITE DISPLAY MODAL METHOD HERE
+  */
+ 
+ displayModal() {
+   this.htmlRef.classList.toggle("hide")
+  }
 }
 
 /**
@@ -303,14 +338,18 @@ export class BookShelf {
    * @return {string} "Learning JavaScript Design Patterns"
    */
 
-  // WRITE LATEST BOOK GETTER HERE
+  get latestBook() {
+    return `${this.booksOnShelf[this.booksOnShelf.length-1]}`
+  }
 
   /**
    * A setter that adds a new book to the list of books.
    * @param {string} "Eloquent JavaScript"
    */
 
-  // WRITE ADD BOOK TO SHELF SETTER HERE
+  set addBookToShelf(book) {
+    this._booksOnShelf.push(book)
+  }
 }
 
 /**
@@ -361,16 +400,22 @@ export class BankAccount {
    * Create a bank account.
    * @param {string} name
    * @param {string} email
-   * @param {number} balance
+   * @param {number} _balance
    */
-  constructor() {}
+  constructor(name, email, balance = 0) {
+    this.name = name;
+    this.email = email;
+    this._balance = balance;
+  }
 
   /**
    * A getter that returns the current balance.
    * @return {number} 20
    */
 
-  // WRITE BALANCE GETTER HERE
+  get balance() {
+    return this._balance;
+  }
 
   /**
    * A method that deposits to the balance.
@@ -381,7 +426,12 @@ export class BankAccount {
    * @return {(number|string)} 40 or "Invalid input, unable to deposit"
    */
 
-  // WRITE DEPOSIT METHOD HERE
+  deposit (dptAmount) {
+    if (dptAmount > 0) {
+      this._balance += Number(dptAmount)
+      return this._balance
+    } else return "Invalid input, unable to deposit"
+  } 
 
   /**
    * A method that withdraws from the balance.
@@ -393,5 +443,13 @@ export class BankAccount {
    * @return {(number|string)} 40 or "Invalid input, unable to deposit" or "Insufficient funds, unable to withdraw"
    */
 
-  // WRITE WITH DRAW METHOD HERE
+  withdraw (wdlAmount) {
+    if (this._balance < wdlAmount) {
+      return "Insufficient funds, unable to withdraw"
+    }
+    if (wdlAmount >= 0) {
+      this._balance -= Number(wdlAmount)
+      return this._balance
+    } else return "Invalid input, unable to withdraw"
+  }
 }
